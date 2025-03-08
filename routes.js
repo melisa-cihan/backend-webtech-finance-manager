@@ -5,7 +5,7 @@ const client = require('./db')
 //CRUD
 // GET all assets
 router.get('/assets', async(req, res) => {
-    const query = `SELECT * FROM assets `;
+    const query = `SELECT * FROM assets ORDER BY id `;
 
     try {
         const result = await client.query(query)
