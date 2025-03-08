@@ -79,7 +79,7 @@ router.put('/assets/:id', async(req, res) => {
             purchase_price = $4,
             roi = $5,
             location = $6,
-            purchase_date = $7,
+            purchase_date = $7
             WHERE id=$8;`;
         const updateresult = await client.query(updatequery, [asset, category, current_value, purchase_price, roi, location, purchase_date, id]);
         console.log(updateresult)
