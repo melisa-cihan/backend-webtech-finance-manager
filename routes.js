@@ -161,4 +161,25 @@ router.get('/asset-growth', async (req, res) => {
     }
 });
 
+router.get('/asset-location-count', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT location, COUNT(*) AS asset_count 
+            FROM assets 
+            GROUP BY location
+            ORDER BY asset_count DESC;
+        `);
+
+        const data = result.rows.map(row => ({
+            location: row.location,
+            asset_count: row.asset_count
+        }));
+
+        res.status(200).json(data);
+    } catch (err) {
+        console.error('Error fetching asset location count:', err);
+        res.status(500).send('Error retrieving asset location data');
+    }
+});
+
 module.exports = router;
