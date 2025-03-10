@@ -182,4 +182,28 @@ router.get('/asset-location-count', async (req, res) => {
     }
 });
 
+router.get('/asset-profitability', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT asset, roi, current_value
+            FROM assets
+            ORDER BY roi DESC;
+        `);
+
+        const data = result.rows.map((row, index) => ({
+            index: index, 
+            asset: row.asset,
+            roi: row.roi,
+            current_value: row.current_value
+        }));
+
+        res.status(200).json(data);
+    } catch (err) {
+        console.error('Error fetching profitability data:', err);
+        res.status(500).send('Error retrieving profitability data');
+    }
+});
+
+
+
 module.exports = router;
