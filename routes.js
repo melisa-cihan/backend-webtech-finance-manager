@@ -108,21 +108,6 @@ router.delete('/assets/:id', async(req, res) => {
     }
 });
 
-// New route to generate Data for the pie chart 
-router.get('/dashboard-test', async (req, res) => {
-    try {
-        const result = await client.query('SELECT SUM(purchase_price) as total_purchase_price, SUM(current_value) as total_current_value FROM assets');
-        const { total_purchase_price, total_current_value } = result.rows[0];
-
-        res.status(200).json({
-            total_purchase_price: total_purchase_price || 0,
-            total_current_value: total_current_value || 0,
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error');
-    }
-});
 
 router.get('/category-distribution', async (req, res) => {
     try {
