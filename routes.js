@@ -109,7 +109,7 @@ router.delete('/assets/:id', async(req, res) => {
 });
 
 // New route to generate Data for the pie chart 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard-test', async (req, res) => {
     try {
         const result = await client.query('SELECT SUM(purchase_price) as total_purchase_price, SUM(current_value) as total_current_value FROM assets');
         const { total_purchase_price, total_current_value } = result.rows[0];
@@ -124,5 +124,41 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
+router.get('/category-distribution', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT category, SUM(current_value) AS total_value
+            FROM assets
+            GROUP BY category
+            ORDER BY total_value DESC
+        `);
+
+        const data = result.rows.map(row => ({
+            category: row.category,
+            total_value: row.total_value
+        }));
+
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving category distribution');
+    }
+});
+
+router.get('/asset-growth', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT purchase_date, SUM(current_value) AS total_value
+            FROM assets
+            GROUP BY purchase_date
+            ORDER BY purchase_date;
+        `);
+
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.error('Error fetching asset growth data:', err);
+        res.status(500).send('Error retrieving asset growth data');
+    }
+});
 
 module.exports = router;
