@@ -26,7 +26,6 @@ const swaggerOptions = {
       description: "API documentation for Finance Manager",
       contact: {
         name: "Melisa Cihan",
-        email: "your-email@example.com"
       }
     },
     servers: [
