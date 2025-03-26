@@ -55,7 +55,7 @@ router.get('/assets/:id', async(req, res) => {
     }
 });
 
-// update one asset (PUT)
+// UPDATE one asset (PUT)
 router.put('/assets/:id', async(req, res) => {
     const query = `SELECT * FROM assets WHERE id=$1`;
 
@@ -108,7 +108,7 @@ router.delete('/assets/:id', async(req, res) => {
     }
 });
 
-
+//GET Endpoint with Aggregation for Pie-Chart Data
 router.get('/category-distribution', async (req, res) => {
     try {
         const result = await client.query(`
@@ -130,6 +130,7 @@ router.get('/category-distribution', async (req, res) => {
     }
 });
 
+//GET Endpoint with Aggregation for Line-Chart Data
 router.get('/asset-growth', async (req, res) => {
     try {
         const result = await client.query(`
@@ -146,6 +147,7 @@ router.get('/asset-growth', async (req, res) => {
     }
 });
 
+//GET Ednpoint for Polar-Chart Data
 router.get('/asset-location-count', async (req, res) => {
     try {
         const result = await client.query(`
@@ -167,6 +169,7 @@ router.get('/asset-location-count', async (req, res) => {
     }
 });
 
+//GET Endpoint for Bubble-Chart Data
 router.get('/asset-profitability', async (req, res) => {
     try {
         const result = await client.query(`
