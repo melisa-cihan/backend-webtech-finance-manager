@@ -33,9 +33,52 @@ router.get('/assets', async(req, res) => {
  *   post:
  *     summary: Add a new asset
  *     description: Creates a new asset entry in the database.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - asset
+ *               - category
+ *               - current_value
+ *               - purchase_price
+ *             properties:
+ *               asset:
+ *                 type: string
+ *                 description: The name of the asset
+ *                 example: "Laptop"
+ *               category:
+ *                 type: string
+ *                 description: The category of the asset
+ *                 example: "Electronics"
+ *               current_value:
+ *                 type: number
+ *                 description: The current value of the asset
+ *                 example: 1000
+ *               purchase_price:
+ *                 type: number
+ *                 description: The price at which the asset was purchased
+ *                 example: 1200
+ *               roi:
+ *                 type: number
+ *                 description: The return on investment of the asset
+ *                 example: 15
+ *               location:
+ *                 type: string
+ *                 description: The location of the asset
+ *                 example: "Office"
+ *               purchase_date:
+ *                 type: string
+ *                 format: date
+ *                 description: The purchase date of the asset
+ *                 example: "2023-05-15"
  *     responses:
  *       201:
  *         description: Asset successfully created
+ *       500:
+ *         description: Server error
  */
 router.post('/assets', async(req, res) => {
     let asset = (req.body.asset) ? req.body.asset : null;
