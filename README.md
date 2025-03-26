@@ -12,7 +12,7 @@ git clone https://github.com/melisa-cihan/backend-webtech.git
 ```
 - Install dependencies
 ```
-cd path to the <project_name>
+cd path to the backend-webtech
 npm install
 
 ```
