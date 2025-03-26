@@ -22,5 +22,9 @@ npm run start
 ```
   Navigate to `http://localhost:3000`
 
+# Swagger Endpoint Documentation
+Navigate to 
+http://localhost:3000/api-docs/
+
 
 
