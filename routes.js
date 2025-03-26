@@ -4,6 +4,16 @@ const client = require('./db')
 
 //CRUD
 // GET all assets
+/**
+ * @swagger
+ * /assets:
+ *   get:
+ *     summary: Get all assets
+ *     description: Fetches all available assets from the database.
+ *     responses:
+ *       200:
+ *         description: A list of assets
+ */
 router.get('/assets', async(req, res) => {
     const query = `SELECT * FROM assets ORDER BY id `;
 
@@ -17,6 +27,16 @@ router.get('/assets', async(req, res) => {
 });
 
 // POST one asset
+/**
+ * @swagger
+ * /assets:
+ *   post:
+ *     summary: Add a new asset
+ *     description: Creates a new asset entry in the database.
+ *     responses:
+ *       201:
+ *         description: Asset successfully created
+ */
 router.post('/assets', async(req, res) => {
     let asset = (req.body.asset) ? req.body.asset : null;
     let category = (req.body.category) ? req.body.category : null;
@@ -39,6 +59,25 @@ router.post('/assets', async(req, res) => {
 });
 
 // GET one asset via id
+/**
+ * @swagger
+ * /assets/{id}:
+ *   get:
+ *     summary: Get an asset by ID
+ *     description: Retrieves a specific asset using its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The asset ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Asset data
+ *       404:
+ *         description: Asset not found
+ */
 router.get('/assets/:id', async(req, res) => {
     const query = `SELECT * FROM assets WHERE id=$1`;
 
@@ -56,6 +95,25 @@ router.get('/assets/:id', async(req, res) => {
 });
 
 // UPDATE one asset (PUT)
+/**
+ * @swagger
+ * /assets/{id}:
+ *   put:
+ *     summary: Update an asset
+ *     description: Updates an asset's details using its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The asset ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Asset successfully updated
+ *       404:
+ *         description: Asset not found
+ */
 router.put('/assets/:id', async(req, res) => {
     const query = `SELECT * FROM assets WHERE id=$1`;
 
@@ -93,6 +151,25 @@ router.put('/assets/:id', async(req, res) => {
 });
 
 // DELETE one asset via id
+/**
+ * @swagger
+ * /assets/{id}:
+ *   delete:
+ *     summary: Delete an asset
+ *     description: Deletes an asset by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The asset ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Asset successfully deleted
+ *       404:
+ *         description: Asset not found
+ */
 router.delete('/assets/:id', async(req, res) => {
     const query = `DELETE FROM assets WHERE id=$1`;
     try {
@@ -109,6 +186,16 @@ router.delete('/assets/:id', async(req, res) => {
 });
 
 //GET Endpoint with Aggregation for Pie-Chart Data
+/**
+ * @swagger
+ * /category-distribution:
+ *   get:
+ *     summary: Get category distribution
+ *     description: Retrieves the total asset value grouped by category.
+ *     responses:
+ *       200:
+ *         description: Data for pie chart
+ */
 router.get('/category-distribution', async (req, res) => {
     try {
         const result = await client.query(`
@@ -131,6 +218,16 @@ router.get('/category-distribution', async (req, res) => {
 });
 
 //GET Endpoint with Aggregation for Line-Chart Data
+/**
+ * @swagger
+ * /asset-growth:
+ *   get:
+ *     summary: Get asset growth over time
+ *     description: Retrieves aggregated asset growth based on purchase date.
+ *     responses:
+ *       200:
+ *         description: Data for line chart
+ */
 router.get('/asset-growth', async (req, res) => {
     try {
         const result = await client.query(`
@@ -148,6 +245,16 @@ router.get('/asset-growth', async (req, res) => {
 });
 
 //GET Ednpoint for Polar-Chart Data
+/**
+ * @swagger
+ * /asset-location-count:
+ *   get:
+ *     summary: Get asset location count
+ *     description: Retrieves the number of assets per location.
+ *     responses:
+ *       200:
+ *         description: Data for polar chart
+ */
 router.get('/asset-location-count', async (req, res) => {
     try {
         const result = await client.query(`
@@ -169,6 +276,16 @@ router.get('/asset-location-count', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /asset-profitability:
+ *   get:
+ *     summary: Get asset profitability
+ *     description: Retrieves the return on investment (ROI) and current value of each asset.
+ *     responses:
+ *       200:
+ *         description: Data for bubble chart
+ */
 //GET Endpoint for Bubble-Chart Data
 router.get('/asset-profitability', async (req, res) => {
     try {
