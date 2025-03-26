@@ -30,7 +30,9 @@ initdb.get('/', async(req, res) => {
         ["Emergency Fund", "Cash", 5000.00, 5000.00, 0.00, "ING Bank", "2023-12-01"],
         ["Apartment in Berlin", "Real Estate", 300000.00, 250000.00, 20.00, "Berlin, Germany", "2020-07-01"],
         ["Beach House in Spain", "Real Estate", 450000.00, 380000.00, 18.42, "Barcelona, Spain", "2019-06-15"],
-        ["Commercial Office in Paris", "Real Estate", 700000.00, 600000.00, 16.67, "Paris, France", "2021-02-20"]
+        ["Commercial Office in Paris", "Real Estate", 70000.00, 600000.00, 16.67, "Paris, France", "2021-02-20"],
+        ["Rolex", "Watch", 20.000, 20000.00, 15.00, "Berlin, Germany", "2025-05-10"],
+        ["Richard Mille", "Watch", 204.000, 10000.00, 35.00, "Paris, France", "2025-04-10"],
        
     ];
    
