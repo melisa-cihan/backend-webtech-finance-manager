@@ -8,7 +8,7 @@ node -v
 # Getting started
 - Clone the repository
 ```
-git clone https://github.com/melisa-cihan/backend-webtech.git
+git clone https://github.com/melisa-cihan/backend-webtech-finance-manager.git
 ```
 - Install dependencies
 ```
